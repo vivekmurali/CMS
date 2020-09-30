@@ -2,47 +2,34 @@ var express = require("express");
 var router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const User = require("../models/user");
+const User = require("../models/User");
+const Post = require("../models/Posts");
+const {
+  login,
+  register,
+  newPost,
+  editPost,
+  deletePost,
+} = require("../controllers/user");
 
-router.route("/register").post((req, res) => {
-  User.findOne({ email: req.body.email }, (err, user) => {
-    if (user) {
-      res.status(403).send("User already exists");
-    } else {
-      req.body.password = bcrypt.hashSync(req.body.password);
-      const user = new User({
-        email: req.body.email,
-        password: req.body.password,
-      });
-      user
-        .save()
-        .then((user) => {
-          req.session.userId = user._id;
-          res.status(200).send("Registered successfully");
-        })
-        .catch((error) => {
-          res.status(400).send("Could not register user");
-        });
-    }
-  });
+router.route("/register").post((req, res, next) => {
+  register(req, res, next);
 });
 
-router.route("/login").post((req, res) => {
-  var email = req.body.email,
-    password = req.body.password;
+router.route("/login").post((req, res, next) => {
+  login(req, res, next);
+});
 
-  User.findOne({ email: email }).then(function (user) {
-    if (!user) {
-      console.log("no user found");
-      res.status(400).send("No user found");
-    } else if (!bcrypt.compare(password, user.password)) {
-      res.status(401).send("Wrong password");
-      console.log("not same password");
-    } else {
-      const token = jwt.sign({ user }, "jsonkey");
-      res.status(200).json({ token: token });
-    }
-  });
+router.post("/posts/new", (req, res, next) => {
+  newPost(req, res, next);
+});
+
+router.put("/posts/edit/:postId", (req, res, next) => {
+  editPost(req, res, next);
+});
+
+router.delete("/posts/delete/:postId", (req, res, next) => {
+  deletePost(req, res, next);
 });
 
 module.exports = router;

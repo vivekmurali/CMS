@@ -8,6 +8,8 @@ const userSchema = new Schema({
     type: Date,
     default: new Date(),
   },
+  siteTitle: String,
+  logo: Buffer,
 });
 
 module.exports = model("User", userSchema);

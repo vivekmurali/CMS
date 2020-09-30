@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const init = () => {
-  mongoose.connect("mongodb://localhost:27017/test", {
+  mongoose.connect("mongodb://localhost:27017/iwp", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
