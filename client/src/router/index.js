@@ -3,6 +3,9 @@ import VueRouter from "vue-router";
 import Register from "../views/Register.vue";
 import Login from "../views/Login.vue";
 import Dashboard from "../views/Dashboard.vue";
+import NewPost from "../views/NewPost.vue";
+import Posts from "../views/Posts.vue";
+import Post from "../views/Post.vue";
 
 Vue.use(VueRouter);
 
@@ -13,6 +16,11 @@ const routes = [
     component: Dashboard,
   },
   {
+    path: "/newpost",
+    name: "NewPost",
+    component: NewPost,
+  },
+  {
     path: "/register",
     name: "Register",
     component: Register,
@@ -21,6 +29,16 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login,
+  },
+  {
+    path: "/posts/:siteTitle",
+    name: "Posts",
+    component: Posts,
+  },
+  {
+    path: "/post",
+    name: "Post",
+    component: Post,
   },
 ];
 

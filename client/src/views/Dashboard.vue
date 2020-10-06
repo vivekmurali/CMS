@@ -1,5 +1,15 @@
 <template>
   <v-container>
+    <v-btn
+      class="ma-2"
+      outlined
+      large
+      fab
+      color="indigo"
+      @click="$router.push('/newpost')"
+    >
+      <v-icon>mdi-pencil</v-icon>
+    </v-btn>
     <v-list-item two-line v-for="(post, index) in posts" :key="index">
       <v-list-item-content>
         <v-list-item-title>{{ post.title }}</v-list-item-title>
@@ -7,7 +17,9 @@
           tag
         }}</v-list-item-subtitle>
       </v-list-item-content>
-      <v-btn elevation="2" medium @click="del(index)">delete</v-btn>
+      <v-btn elevation="2" medium @click="del(index)" color="error"
+        >delete</v-btn
+      >
     </v-list-item>
   </v-container>
 </template>

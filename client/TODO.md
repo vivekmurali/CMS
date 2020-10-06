@@ -1,3 +1,5 @@
 * [] New post
 * [x] Delete post
-* [] Show post
+* [x] Show posts
+* [*] Show post
+* [] Sort posts by tags
