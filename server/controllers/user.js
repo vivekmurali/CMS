@@ -7,16 +7,34 @@ const login = (req, res, next) => {
   var email = req.body.email,
     password = req.body.password;
 
+  // User.findOne({ email: email }).then(function (user) {
+  //   if (!user) {
+  //     console.log("no user found");
+  //     res.status(400).send("No user found");
+  //   } else if (!bcrypt.compare(password, user.password)) {
+  //     res.status(401).send("Wrong password");
+  //     console.log("not same password");
+  //   } else {
+  //     const token = jwt.sign({ user }, "jsonkey");
+  //     console.log(user.password);
+  //     res.status(200).json({ token: token });
+  //   }
+  // });
   User.findOne({ email: email }).then(function (user) {
     if (!user) {
       console.log("no user found");
       res.status(400).send("No user found");
-    } else if (!bcrypt.compare(password, user.password)) {
-      res.status(401).send("Wrong password");
-      console.log("not same password");
     } else {
-      const token = jwt.sign({ user }, "jsonkey");
-      res.status(200).json({ token: token });
+      bcrypt.compare(password, user.password).then((a) => {
+        if (a === false) {
+          res.status(401).send("Wrong password");
+          console.log("not same password");
+        } else {
+          const token = jwt.sign({ user }, "jsonkey");
+          console.log(user.password);
+          res.status(200).json({ token: token });
+        }
+      });
     }
   });
 };

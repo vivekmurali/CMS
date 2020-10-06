@@ -15,4 +15,18 @@ router.get("/posts/:title", (req, res) => {
   });
 });
 
+router.get("/posts", (req, res) => {
+  const token = req.headers["authorization"].split(" ")[1];
+  jwt.verify(token, "jsonkey", (err, user) => {
+    if (err) {
+      console.error(err.message);
+      res.status(401).send("unauthorized");
+      return;
+    }
+    Post.find({ siteTitle: user.user.siteTitle }, (err, posts) => {
+      if (err) throw err;
+      res.status(200).json(posts);
+    });
+  });
+});
 module.exports = router;
