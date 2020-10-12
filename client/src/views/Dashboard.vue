@@ -29,7 +29,7 @@ export default {
   name: "Dashboard",
   data() {
     return {
-      posts: [{ title: "hello", content: "hey", tags: ["a", "b"] }]
+      posts: []
     };
   },
   methods: {
