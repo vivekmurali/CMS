@@ -3,11 +3,10 @@
     <v-btn
       class="ma-2"
       outlined
-      large
-      fab
       color="indigo"
       @click="$router.push('/newpost')"
     >
+      <span>New post</span>
       <v-icon>mdi-pencil</v-icon>
     </v-btn>
     <v-list-item two-line v-for="(post, index) in posts" :key="index">
