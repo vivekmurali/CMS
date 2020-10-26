@@ -6,6 +6,7 @@ import Dashboard from "../views/Dashboard.vue";
 import NewPost from "../views/NewPost.vue";
 import Posts from "../views/Posts.vue";
 import Post from "../views/Post.vue";
+import Edit from "../views/EditPost.vue";
 
 Vue.use(VueRouter);
 
@@ -19,6 +20,11 @@ const routes = [
     path: "/newpost",
     name: "NewPost",
     component: NewPost,
+  },
+  {
+    path: "/edit",
+    name: "Edit",
+    component: Edit,
   },
   // {
   //   path: "/register",

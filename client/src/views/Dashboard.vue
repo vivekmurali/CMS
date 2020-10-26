@@ -18,11 +18,12 @@
           ><a
             @click="
               $router.push({
-                name: 'Post',
+                name: 'Edit',
                 params: {
                   title: post.title,
                   content: post.content,
-                  tags: post.tags
+                  tags: post.tags,
+                  id: post._id
                 }
               })
             "
