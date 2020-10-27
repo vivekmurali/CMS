@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-btn
-      class="ma-2"
+      class="ma-2 ml-6"
       outlined
       color="indigo"
       @click="$router.push('/newpost')"
@@ -9,6 +9,23 @@
       <span>New post</span>
       <v-icon>mdi-pencil</v-icon>
     </v-btn>
+    <v-btn
+      class="ma-2"
+      outlined
+      color="indigo"
+      @click="
+        $router.push({
+          name: 'Settings',
+          params: {
+            siteTitle: siteTitle
+          }
+        })
+      "
+    >
+      <span>Settings</span>
+      <v-icon>mdi-cog</v-icon>
+    </v-btn>
+
     <v-list-item two-line v-for="(post, index) in posts" :key="index">
       <v-list-item-content
         :style="{ background: 'rgba(247, 235, 200, 0.3)' }"
@@ -49,7 +66,9 @@ export default {
   name: "Dashboard",
   data() {
     return {
-      posts: []
+      posts: [],
+      test: "what",
+      siteTitle: ""
     };
   },
   methods: {
@@ -87,6 +106,7 @@ export default {
         })
         .then(res => {
           this.posts = res;
+          this.siteTitle = this.posts[0].siteTitle;
         });
     }
   }

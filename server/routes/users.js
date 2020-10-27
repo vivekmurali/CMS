@@ -7,7 +7,7 @@ const Post = require("../models/Posts");
 const {
   login,
   register,
-  edituser,
+  editUser,
   newPost,
   editPost,
   deletePost,
@@ -17,7 +17,7 @@ router.route("/register").post((req, res, next) => {
   register(req, res, next);
 });
 
-router.route("/edituser").post((req, res, next) => {
+router.route("/edituser").put((req, res, next) => {
   editUser(req, res, next);
 });
 

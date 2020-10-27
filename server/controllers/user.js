@@ -49,19 +49,23 @@ const register = (req, res, next) => {
   });
 };
 
-const edituser = (req, res, next) => {
+const editUser = (req, res, next) => {
   const token = req.headers["authorization"].split(" ")[1];
-  jwt.verify(token, "jsonkey", (err, user) => {
+  req.body.password = bcrypt.hashSync(req.body.password);
+  jwt.verify(token, "jsonkey", async (err, user) => {
     if (err) {
       console.error(err.message);
       res.status(401).send("unauthorized");
       return;
     }
-    await User.findByIdAndUpdate({_id: user.user._id},{
-      email: req.body.email,
-      password: req.body.password,
-      siteTitle: req.body.siteTitle
-    });
+    await User.findByIdAndUpdate(
+      { _id: user.user._id },
+      {
+        email: req.body.email,
+        password: req.body.password,
+        siteTitle: req.body.siteTitle,
+      }
+    );
     res.status(200).send("Updated user settings");
   });
 };
@@ -118,4 +122,4 @@ const deletePost = (req, res, next) => {
   });
 };
 
-module.exports = { login, register, edituser, newPost, editPost, deletePost };
+module.exports = { login, register, editUser, newPost, editPost, deletePost };
