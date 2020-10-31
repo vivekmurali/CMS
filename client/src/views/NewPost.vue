@@ -15,7 +15,7 @@
     ></v-textarea>
     <v-combobox
       v-model="tags"
-      hint="Maximum of 5 tags"
+      hint="Press Enter or Tab"
       label="Add some tags"
       multiple
       small-chips

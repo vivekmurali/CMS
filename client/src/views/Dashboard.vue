@@ -3,7 +3,7 @@
     <v-btn
       class="ma-2 ml-6"
       outlined
-      color="indigo"
+      color="#394867"
       @click="$router.push('/newpost')"
     >
       <span>New post</span>
@@ -12,7 +12,7 @@
     <v-btn
       class="ma-2"
       outlined
-      color="indigo"
+      color="#394867"
       @click="
         $router.push({
           name: 'Settings',
@@ -26,38 +26,46 @@
       <v-icon>mdi-cog</v-icon>
     </v-btn>
 
-    <v-list-item two-line v-for="(post, index) in posts" :key="index">
-      <v-list-item-content
-        :style="{ background: 'rgba(247, 235, 200, 0.3)' }"
+    <template v-for="(post, index) in posts">
+      <v-list-item
+        two-line
+        :style="{ background: '#9ba4b4', borderRadius: '15px' }"
+        :key="index"
         class="ma-2 pa-2 text-center"
       >
-        <v-list-item-title :style="{ fontSize: '1.4rem' }"
-          ><a
-            @click="
-              $router.push({
-                name: 'Edit',
-                params: {
-                  title: post.title,
-                  content: post.content,
-                  tags: post.tags,
-                  id: post._id
-                }
-              })
-            "
-            :style="{ fontSize: '1.8rem' }"
-            >{{ post.title }}</a
-          ></v-list-item-title
+        <v-list-item-content>
+          <v-list-item-title :style="{ fontSize: '1.4rem' }"
+            ><a
+              @click="
+                $router.push({
+                  name: 'Edit',
+                  params: {
+                    title: post.title,
+                    content: post.content,
+                    tags: post.tags,
+                    id: post._id
+                  }
+                })
+              "
+              :style="{ fontSize: '1.8rem', color: '#14274e' }"
+              >{{ post.title }}</a
+            ></v-list-item-title
+          >
+          <v-list-item-subtitle
+            ><span
+              v-for="tag in post.tags"
+              :key="tag"
+              :style="{ fontSize: '1.3rem', color: '#394867' }"
+            >
+              {{ tag }}
+            </span></v-list-item-subtitle
+          >
+        </v-list-item-content>
+        <v-btn elevation="2" medium @click="del(index)" color="error"
+          >delete</v-btn
         >
-        <v-list-item-subtitle
-          ><span v-for="tag in post.tags" :key="tag">
-            {{ tag }}
-          </span></v-list-item-subtitle
-        >
-      </v-list-item-content>
-      <v-btn elevation="2" medium @click="del(index)" color="error"
-        >delete</v-btn
-      >
-    </v-list-item>
+      </v-list-item>
+    </template>
   </v-container>
 </template>
 

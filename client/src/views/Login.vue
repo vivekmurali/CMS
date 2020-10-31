@@ -1,36 +1,5 @@
 <template>
-  <!-- <v-form v-model="valid">
-    <v-container>
-      <v-row>
-        <v-col cols="12" md="4">
-          <v-text-field
-            v-model="email"
-            :rules="nameRules"
-            :counter="10"
-            label="Username"
-            required
-          ></v-text-field>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12" md="4">
-          <v-text-field
-            v-model="password"
-            :rules="passwordRules"
-            type="password"
-            label="Password"
-            required
-          ></v-text-field>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-btn class="mr-4" @click="login">
-          submit
-        </v-btn>
-      </v-row>
-    </v-container>
-  </v-form> -->
-  <v-app id="inspire">
+  <v-app id="inspire" :style="{ background: '#f1f6f9' }">
     <v-snackbar v-model="snackbar" :timeout="4000" top color="error">
       <span>{{ snackbarText }}</span>
       <v-btn text color="white" @click="snackbar = false">Close</v-btn>
@@ -41,9 +10,13 @@
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md4>
             <v-card class="elevation-10">
-              <v-toolbar dark color="primary">
-                <v-toolbar-title v-if="login">Sign in</v-toolbar-title>
-                <v-toolbar-title v-if="!login">Sign up</v-toolbar-title>
+              <v-toolbar color="#14274e">
+                <v-toolbar-title :style="{ color: '#9ba4b4' }" v-if="login"
+                  >SIGN IN</v-toolbar-title
+                >
+                <v-toolbar-title :style="{ color: '#9ba4b4' }" v-if="!login"
+                  >SIGN UP</v-toolbar-title
+                >
               </v-toolbar>
               <v-card-text>
                 <v-form
@@ -54,7 +27,7 @@
                     prepend-icon="mdi-head"
                     name="email"
                     v-model="email"
-                    label="Email"
+                    label="Username"
                     type="text"
                     :rules="nameRules"
                   ></v-text-field>
@@ -82,33 +55,35 @@
                   @click="login = true"
                   v-if="!login"
                 >
-                  <a>Already have an account? Sign in</a>
+                  <a :style="{ color: '#14274e' }">
+                    Already have an account? Sign in</a
+                  >
                 </p>
-                <p
-                  class="text-xs-center primary--text"
-                  @click="login = false"
-                  v-if="login"
-                >
-                  <a>Don't have an account? Sign up</a>
+                <p class="text-xs-center" @click="login = false" v-if="login">
+                  <a :style="{ color: '#14274e' }"
+                    >Don't have an account? Sign up</a
+                  >
                 </p>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn
-                  color="primary"
+                  color="#394867"
                   v-if="login"
                   type="submit"
                   form="login-form"
                   :loading="loading"
+                  :style="{ color: '#9ba4b4' }"
                   >Login</v-btn
                 >
                 <v-btn
-                  color="primary"
+                  color="#394867"
                   v-if="!login"
                   type="submit"
                   form="login-form"
                   :loading="loading"
-                  >Sing up</v-btn
+                  :style="{ color: '#9ba4b4' }"
+                  >Sign up</v-btn
                 >
               </v-card-actions>
             </v-card>

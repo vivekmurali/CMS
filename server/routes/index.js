@@ -15,6 +15,13 @@ router.get("/posts/:title", (req, res) => {
   });
 });
 
+router.get("/allposts", (req, res) => {
+  User.find({}, (err, user) => {
+    if (err) throw err;
+    res.send(user);
+  });
+});
+
 router.get("/posts", (req, res) => {
   const token = req.headers["authorization"].split(" ")[1];
   jwt.verify(token, "jsonkey", (err, user) => {
