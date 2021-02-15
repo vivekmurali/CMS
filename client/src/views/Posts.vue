@@ -108,6 +108,7 @@ export default {
       tags: [],
       tag: "",
       siteTitle: ""
+      // comments: []
     };
   },
   created() {
@@ -116,11 +117,13 @@ export default {
         if (res.status == 200) {
           return res.json();
         } else {
-          console.log("God is a woman");
+          console.log("Not working");
         }
       })
       .then(res => {
+        // this.posts = res.posts;
         this.posts = res;
+        // this.comments = res.comments;
         this.tags = this.posts.map(post => {
           return post.tags.map(tag => tag);
         });

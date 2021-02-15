@@ -3,6 +3,7 @@ var router = express.Router();
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const Post = require("../models/Posts");
+const Comment = require("../models/Comment");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -11,7 +12,10 @@ router.get("/", function (req, res, next) {
 
 router.get("/posts/:title", (req, res) => {
   Post.find({ siteTitle: req.params.title }, (err, posts) => {
+    // console.log(posts);
+    // let comments = posts.map((post) => post._id);
     res.status(200).json(posts);
+    // res.status(200).json({ posts: posts, comments: comments });
   });
 });
 
@@ -35,5 +39,20 @@ router.get("/posts", (req, res) => {
       res.status(200).json(posts);
     });
   });
+});
+
+router.post("/comments", (req, res) => {
+  const comment = new Comment({
+    content: req.body.content,
+    postId: req.body.postId,
+  });
+  comment
+    .save()
+    .then(() => {
+      res.status(200).send("Added comment");
+    })
+    .catch((err) => {
+      res.send(400).send("Could not comment");
+    });
 });
 module.exports = router;
